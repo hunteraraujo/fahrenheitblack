@@ -90,6 +90,10 @@ The system is divided into seven main modules:
 - `OrderManagement`
   - `.create_order()`: Create a new order.
   - `.monitor_order()`: Monitor the status of an open order.
+ 
+- `OrderQueue`
+  - `.enqueue_order()`: Add new orders to a queue for batch processing.
+  - `.dequeue_order()`: Remove orders from the queue for execution.
 
 ### 6. Performance Metrics and Evaluation Module
 
