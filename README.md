@@ -86,10 +86,15 @@ The system is divided into seven main modules:
 
 - `BrokerIntegration`
   - `.execute_order()`: Send orders to Interactive Brokers for execution.
+  - `.query_open_orders()`: Query the list of open orders from Interactive Brokers.
+  - `.query_positions()`: Query the list of current positions from Interactive Brokers.
+  - `.query_account_details()`: Query account-related details like available cash, margin, etc., from Interactive Brokers.
 
 - `OrderManagement`
-  - `.create_order()`: Create a new order.
+  - `.create_order()`: Create a new order based on trading signals.
   - `.monitor_order()`: Monitor the status of an open order.
+  - `.cancel_order()`: Cancel an open order.
+  - `.modify_order()`: Modify an existing order, e.g., change order size, type, or price.
  
 - `OrderQueue`
   - `.enqueue_order()`: Add new orders to a queue for batch processing.
