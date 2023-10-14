@@ -133,7 +133,7 @@ The system is divided into seven main modules:
 3. **Data Processing**: Data are cleaned and transformed using the `DataProcessing` class.
 4. **Strategy Execution**: The `StrategyExecutor` class consumes the processed data to execute trading strategies, generating trading signals.
 5. **Risk Management**: The `StrategyLevelRisk` and `PortfolioLevelRisk` classes evaluate these signals and apply risk parameters.
-6. **Order Execution**: Valid signals are sent to Interactive Brokers for order execution through the `BrokerIntegration` class.
-7. **Performance Metrics**: The `MetricsCalculation` class continuously calculates and logs performance metrics.
-8. **Monitoring**: The `Diagnostics` class sends real-time alerts and logs system activities.
-
+6. **Order Creation**: New orders are created based on valid signals by the `OrderManagement` class.
+7. **Order Execution and Query**: Orders are sent to Interactive Brokers for execution through the `BrokerIntegration` class. Open orders, positions, and account details can be queried.
+8. **Performance Metrics**: Performance metrics are calculated and logged by the `MetricsCalculation` class.
+9. **Monitoring and Alerts**: System activities and performance anomalies are logged and alerts are sent by the `Diagnostics` class.
