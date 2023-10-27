@@ -1,0 +1,14 @@
+[tool.poetry]
+name = "fahrenheitblack"
+version = "0.1.0"
+description = "Quant Trading Suite"
+authors = ["J. Zane Cook <90814067+jzanecook@users.noreply.github.com>", "Hunter Araujo <hunter_araujo@msn.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
