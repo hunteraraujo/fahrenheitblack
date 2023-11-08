@@ -4,6 +4,8 @@ from pandas import DataFrame
 from data_management.data_retrieval import DataRetrieval
 from data_management.data_storage import DataStorage
 
+from trading_strategies.strategy_interface import StrategyInterface
+
 from entities.activity import Activity
 from entities.alert import Alert
 from entities.confirmation import Confirmation
