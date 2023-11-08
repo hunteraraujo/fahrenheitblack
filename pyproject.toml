@@ -2,11 +2,16 @@
 name = "fahrenheitblack"
 version = "0.1.0"
 description = "Quant Trading Suite"
-authors = ["J. Zane Cook <90814067+jzanecook@users.noreply.github.com>", "Hunter Araujo <hunter_araujo@msn.com>"]
+authors = [
+    "J. Zane Cook <90814067+jzanecook@users.noreply.github.com>",
+    "Hunter Araujo <hunter_araujo@msn.com>",
+]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.11"
+python = "<3.13,>=3.9"
+ib-insync = "^0.9.86"
+pandas = "^2.1.2"
 
 
 [build-system]
