@@ -60,33 +60,6 @@ class Status:
         self.status_type = status_type
         self.message = message
 
-# ! Skipping Risk Management for MVP
-class StrategyLevelRisk:
-    def __init__(self, stop_loss_level: float, take_profit_level: float):
-        self.stop_loss_level = stop_loss_level
-        self.take_profit_level = take_profit_level
-
-    def apply_stop_loss(self, signals: Series, level: float):
-        # Code to apply stop-loss levels to a strategy
-        pass
-
-    def apply_take_profit(self, signals: Series, level: float):
-        # Code to apply take-profit levels to a strategy
-        pass
-
-# ! Skipping Risk Management for MVP
-class PortfolioLevelRisk:
-    def __init__(self, max_drawdown: float):
-        self.max_drawdown = max_drawdown
-
-    def calculate_max_drawdown(self, portfolio: Portfolio) -> float:
-        # Code to calculate the maximum drawdown for the portfolio
-        pass
-
-    def halt_trading(self, threshold: float):
-        # Code to halt trading activities if risk thresholds are breached
-        pass
-
 class StrategyInterface:
     def __init__(
             self,
