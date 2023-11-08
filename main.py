@@ -60,51 +60,6 @@ class Status:
         self.status_type = status_type
         self.message = message
 
-class DataProcessing:
-    def __init__(self, data: DataFrame):
-        self.data = data
-
-    def clean_data(self, data: DataFrame) -> DataFrame:
-        # Code to clean and preprocess data
-        pass
-
-    # ? Leaving vague for now, this *may* be more for transforming necessary data in some
-    # ? way separate from clean_data (e.g. calculating a volume-weighted average price)
-    # ? Rather than just cleaning/preprocessing the data
-
-    # ? What we may do is keep the strategy data processing example below specific to the
-    # ? StrategyInterface.analyze method.
-    def transform_data(self, data: DataFrame, expr: List[str]) -> DataFrame:
-        # Code to apply necessary transformations or calculations
-
-        # ! Hot take: "expr" would be replaced with a list of tickList items (from an enum)
-        # ! Just adding columns to the DataFrame with the tickList calculations
-
-        pass
-
-    # ? Example: This is an example that may not be what it actually do be.
-    # ! This would NOT be a subclass, but keeping the functions separate would be good :+1:
-    # class MyStrategyDataProcessing (DataProcessing):
-    #     def __init__(self, data: DataFrame):
-    #         super().__init__(data)
-
-    #     def clean_data(self, data: DataFrame) -> DataFrame:
-    #         # Code to clean and preprocess data
-    #         pass
-
-    #     def get_sma(self, data: DataFrame, window: int) -> DataFrame:
-    #         # Code to calculate the simple moving average
-    #         pass
-
-    #     def transform_data(self, data: DataFrame, expr: str) -> DataFrame:
-    #         # Code to apply necessary transformations or calculations
-
-    #         # Example: Calculate the 50-day simple moving average
-    #         data['SMA'] = self.get_sma(data, 50)
-
-    #         pass
-
-
 # ! Skipping Risk Management for MVP
 class StrategyLevelRisk:
     def __init__(self, stop_loss_level: float, take_profit_level: float):
