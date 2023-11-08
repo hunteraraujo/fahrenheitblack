@@ -1,8 +1,8 @@
 from typing import List, Dict
 from pandas import DataFrame, Series
 
-from data_retrieval import DataRetrieval
-from data_storage import DataStorage
+from data_management.data_retrieval import DataRetrieval
+from data_management.data_storage import DataStorage
 
 class Order:
     def __init__(self, order_type: str, symbol: str, quantity: int, price: float):
