@@ -1,6 +1,6 @@
 from pandas import DataFrame, Series
 
-from trading_strategies.strategy_interface import StrategyInterface
+from strategy_interface import StrategyInterface
 
 class SimpleMovingAverageStrategy(StrategyInterface):
     """
