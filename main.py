@@ -1,89 +1,19 @@
 from typing import List, Dict
-from pandas import DataFrame, Series
+from pandas import DataFrame
 
 from data_management.data_retrieval import DataRetrieval
 from data_management.data_storage import DataStorage
 
-class Order:
-    def __init__(self, order_type: str, symbol: str, quantity: int, price: float):
-        self.order_type = order_type
-        self.symbol = symbol
-        self.quantity = quantity
-        self.price = price
-
-class Position:
-    def __init__(self, symbol: str, quantity: int, price: float):
-        self.symbol = symbol
-        self.quantity = quantity
-        self.price = price
-
-class Signal:
-    def __init__(self, symbol: str, signal_type: str, price: float):
-        self.symbol = symbol
-        self.signal_type = signal_type
-        self.price = price
-
-class Trade:
-    def __init__(self, symbol: str, quantity: int, price: float):
-        self.symbol = symbol
-        self.quantity = quantity
-        self.price = price
-
-class Portfolio:
-    def __init__(self, positions: List[Position], initial_balance: float, current_balance: float):
-        self.positions = positions
-        self.initial_cash = initial_balance
-        self.current_cash = current_balance
-
-class Update:
-    def __init__(self, update_type: str, description: str):
-        self.update_type = update_type
-        self.description = description
-
-class Alert:
-    def __init__(self, alert_type: str, message: str):
-        self.alert_type = alert_type
-        self.message = message
-
-class Activity:
-    def __init__(self, activity_type: str, description: str):
-        self.activity_type = activity_type
-        self.description = description
-
-class Confirmation:
-    def __init__(self, confirmation_type: str, message: str):
-        self.confirmation_type = confirmation_type
-        self.message = message
-
-class Status:
-    def __init__(self, status_type: str, message: str):
-        self.status_type = status_type
-        self.message = message
-
-class StrategyInterface:
-    def __init__(
-            self,
-            data: DataFrame,
-        ):
-        self.data = data
-        self.signals = None
-
-    def analyze(self, data: DataFrame):
-        # Code to analyze data and generate trading signals
-
-        # Sets self.signals to a Series of trading signals
-
-        # Pass in the most recent data since the last time analyze was called
-        # ! The strategy itself would be in this function
-
-        # e.g.:
-        # if data['SMA'][-1] > data['SMA'][-2]:)
-        #     self.signals = Series(1, index=data.index)
-        # else:
-        #     self.signals = Series(-1, index=data.index)
-
-        pass
-
+from entities.activity import Activity
+from entities.alert import Alert
+from entities.confirmation import Confirmation
+from entities.order import Order
+from entities.portfolio import Portfolio
+from entities.position import Position
+from entities.signal import Signal
+from entities.status import Status
+from entities.trade import Trade
+from entities.update import Update
 
 class OrderManagement:
     def __init__(self):
