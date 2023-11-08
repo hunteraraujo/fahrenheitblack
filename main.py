@@ -2,6 +2,7 @@ from typing import List, Dict
 from pandas import DataFrame, Series
 
 from data_retrieval import DataRetrieval
+from data_storage import DataStorage
 
 class Order:
     def __init__(self, order_type: str, symbol: str, quantity: int, price: float):
@@ -58,18 +59,6 @@ class Status:
     def __init__(self, status_type: str, message: str):
         self.status_type = status_type
         self.message = message
-
-class DataStorage:
-    def __init__(self, data_path: str):
-        self.data_path = data_path
-
-    def save_to_csv(self, data: DataFrame, filename: str):
-        # Code to save data to a CSV file
-        pass
-
-    def load_from_csv(self, filename: str) -> DataFrame:
-        # Code to load data from a CSV file
-        pass
 
 class DataProcessing:
     def __init__(self, data: DataFrame):
