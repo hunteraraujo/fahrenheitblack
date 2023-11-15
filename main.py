@@ -17,27 +17,6 @@ from entities.status import Status
 from entities.trade import Trade
 from entities.update import Update
 
-class OrderManagement:
-    def __init__(self):
-        self.orders = None
-
-    def create_order(self, signal: Signal) -> Order:
-        # Code to create a new order based on trading signal
-        pass
-
-    def monitor_order(self, order: Order) -> Status:
-        # Code to monitor the status of an open order
-        pass
-
-    def cancel_order(self, order: Order) -> Confirmation:
-        # Code to cancel an open order
-        pass
-
-    def modify_order(self, order: Order, modifications: Dict) -> Confirmation:
-        # Code to modify an existing order
-        pass
-
-
 class MetricsCalculation:
     def __init__(self):
         self.metrics = None
@@ -98,27 +77,6 @@ class PerformanceAnalysis:
 
     def visualize_results(self, results: DataFrame):
         # Code to generate visualizations for backtesting results
-        pass
-
-# ? Owner: TradingSystem
-class BrokerIntegration:
-    def __init__(self, broker: str):
-        self.broker = broker
-
-    def execute_order(self, order: Order) -> Confirmation:
-        # Code to execute order and return confirmation
-        pass
-
-    def query_open_orders(self) -> List[Order]:
-        # Code to return a list of open orders
-        pass
-
-    def query_positions(self) -> List[Position]:
-        # Code to return a list of current positions
-        pass
-
-    def query_account_details(self) -> Dict:
-        # Code to return account-related details
         pass
 
 # ? Owner: TradingSystem
