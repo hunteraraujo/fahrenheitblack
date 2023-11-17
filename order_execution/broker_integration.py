@@ -1,6 +1,7 @@
 from typing import Dict, List
 
-from ib_insync import IB, Stock, Option, LimitOrder, MarketOrder
+from ib_insync import IB, Stock, Option, LimitOrder, MarketOrder, Contract
+from ib_insync.order import Order as IBOrder
 from entities.stock_order import StockOrder
 from entities.option_order import OptionOrder
 from entities.order import Order
@@ -97,3 +98,101 @@ class BrokerIntegration:
         """
         account_values = self.ib.accountValues()
         return {av.tag: av.value for av in account_values}
+
+    def cancel_order(self, order: Order) -> Confirmation:
+        """
+        Cancels a trading order using Interactive Brokers.
+
+        Parameters:
+            order (Order): The order to be cancelled.
+
+        Returns:
+            Confirmation: An object indicating the status of the order cancellation.
+        """
+        self.ib.cancelOrder(order.orderId)
+        return Confirmation('SUCCESS', 'Order cancelled')
+
+    def modify_order(self, old_order: Order, new_order: Order) -> Confirmation:
+        """
+        Modifies a trading order using Interactive Brokers.
+
+        Parameters:
+            old_order (Order): The order to be modified.
+            new_order (Order): The new order parameters.
+
+        Returns:
+            Confirmation: An object indicating the status of the order modification.
+        """
+        self.cancel_order(old_order)
+        return self.execute_order(new_order)
+    
+    def _convert_from_ib_order(self, ib_order: IBOrder) -> Order:
+        """
+        Converts an ib_insync order to a custom Order object.
+
+        Parameters:
+            ib_order (ib_insync.Order): The ib_insync order to be converted.
+
+        Returns:
+            Order: The converted custom Order object.
+        """
+
+        trade = next((trade for trade in self.ib.trades() if trade.order.orderId == ib_order.orderId), None)
+        if trade is None:
+            raise ValueError(f"No trade found with orderId: {ib_order.orderId}")
+        contract = trade.contract
+
+        if contract.secType == 'STK':
+            return StockOrder(
+                order_id=ib_order.orderId,
+                order_type=ib_order.orderType,
+                symbol=contract.symbol,
+                quantity=ib_order.totalQuantity,
+                price=ib_order.lmtPrice if ib_order.orderType == 'LMT' else ib_order.auxPrice
+            )
+        elif contract.secType == 'OPT':
+            return OptionOrder(
+                order_id=ib_order.orderId,
+                order_type=ib_order.orderType,
+                symbol=contract.symbol,
+                quantity=ib_order.totalQuantity,
+                price=ib_order.lmtPrice if ib_order.orderType == 'LMT' else ib_order.auxPrice,
+                strike=contract.strike,
+                expiry=contract.lastTradeDateOrContractMonth,
+                option_type=contract.right
+            )
+        else:
+            raise ValueError(f"Unsupported secType: {contract.secType}")
+        
+    # def _convert_from_ib_order(self, ib_order) -> Order:
+    #     """
+    #     Converts an Interactive Brokers order object to a local Order object (StockOrder or OptionOrder).
+
+    #     Parameters:
+    #         ib_order: The order object from Interactive Brokers.
+
+    #     Returns:
+    #         Order: The corresponding local Order object.
+    #     """
+    #     # Extract common order attributes
+    #     order_id = ib_order.orderId
+    #     order_type = 'MARKET' if isinstance(ib_order, MarketOrder) else 'LIMIT'
+    #     quantity = ib_order.totalQuantity
+    #     price = ib_order.lmtPrice if order_type == 'LIMIT' else None
+
+    #     # Retrieve the contract using the referenceContractId
+    #     contract = self.ib.qualifyContracts(Contract(conId=ib_order.order.conId))[0]
+
+    #     # Check the type of contract and create the appropriate order object
+    #     if contract.secType == 'STK':
+    #         symbol = contract.symbol
+    #         return StockOrder(order_id, order_type, symbol, quantity, price)
+    #     elif contract.secType == 'OPT':
+    #         symbol = contract.symbol
+    #         strike = contract.strike
+    #         expiry = contract.lastTradeDateOrContractMonth
+    #         option_type = contract.right
+    #         return OptionOrder(order_id, order_type, symbol, quantity, price, strike, expiry, option_type)
+    #     else:
+    #         # Handling for unsupported contract types, if necessary
+    #         pass
