@@ -1,8 +1,13 @@
 from typing import List, Dict
 from pandas import DataFrame
+from application.diagnostics import Diagnostics
 
 from data_management.data_retrieval import DataRetrieval
 from data_management.data_storage import DataStorage
+from order_execution.broker_integration import BrokerIntegration
+from order_execution.order_management import OrderManagement
+from performance.metrics_calculations import MetricsCalculation
+from performance.optimization import Optimization
 
 from trading_strategies.strategy_interface import StrategyInterface
 
@@ -16,19 +21,6 @@ from entities.signal import Signal
 from entities.status import Status
 from entities.trade import Trade
 from entities.update import Update
-
-class MetricsCalculation:
-    def __init__(self):
-        self.metrics = None
-
-    def calculate_real_time_metrics(self, data: DataFrame, orders: List[Order]) -> Dict:
-        # Code to calculate real-time performance metrics
-        pass
-
-    def calculate_post_trade_metrics(self, trades: List[Trade]) -> Dict:
-        # Code to calculate post-trade metrics
-        pass
-
 
 class StrategyExecutor:
     def __init__(
@@ -49,66 +41,10 @@ class StrategyExecutor:
             "AAPL",
             self.strategy.analyze(self.strategy.data)
         )
-
         pass
 
     def scale_strategy(self, factor: float):
         # Code to scale a strategy based on performance
-        pass
-
-# ! Skipping Backtesting Class for MVP (Everything will be backtesting)
-class CustomBacktester:
-    def __init__(self, strategy: StrategyInterface, data: DataFrame):
-        self.strategy = strategy
-        self.data = data
-
-    def run_backtest(self, strategy: StrategyInterface, data: DataFrame) -> DataFrame:
-        # Code to run backtest for a specific strategy and return results
-        pass
-
-    def calculate_performance_metrics(self, results: DataFrame) -> Dict:
-        # Code to calculate performance metrics after backtesting
-        pass
-
-
-class PerformanceAnalysis:
-    def __init__(self, results: DataFrame):
-        self.results = results
-
-    def visualize_results(self, results: DataFrame):
-        # Code to generate visualizations for backtesting results
-        pass
-
-# ? Owner: TradingSystem
-# ! TODO: Rework this to be dependent on a dict of strategies and their P/L
-class Optimization:
-    def __init__(self, portfolio: Portfolio):
-        self.portfolio = portfolio
-
-    def apply_half_kelly(self, portfolio: Portfolio) -> Dict:
-        # Code to apply the Half Kelly Criterion for portfolio rebalancing
-        pass
-
-# ! Skipping for MVP
-class UpdatesManagement:
-    def __init__(self, updates: List[Update]):
-        self.updates = updates
-
-    def apply_update(self, update: Update) -> Confirmation:
-        # Code to apply system updates or bug fixes
-        pass
-
-# ? Owner: TradingSystem
-class Diagnostics:
-    def __init__(self, alerts: List[Alert]):
-        self.alerts = alerts
-
-    def send_alert(self, alert: Alert) -> Confirmation:
-        # Code to send real-time alerts via SMS or email
-        pass
-
-    def log_activity(self, activity: Activity):
-        # Code to log system activities and performance
         pass
 
 
