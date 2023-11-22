@@ -2,6 +2,7 @@ from typing import Dict, List
 
 from ib_insync import IB, Stock, Option, LimitOrder, MarketOrder, Contract
 from ib_insync.order import Order as IBOrder
+from entities.status import Status
 from entities.stock_order import StockOrder
 from entities.option_order import OptionOrder
 from entities.order import Order
@@ -78,6 +79,21 @@ class BrokerIntegration:
         """
         open_orders = self.ib.openOrders()
         return [self._convert_from_ib_order(order) for order in open_orders]
+    
+    # TODO: What constitutes a session?
+    def query_order_status(self, order: Order) -> Status:
+        """
+        Returns order status from order in current session.
+
+        Returns:
+            Status: An object indicating the status of the order execution.
+        """
+        orders = self.ib.orders()
+        for ib_order in orders:
+            if order.order_id == ib_order.order_id:
+                return Status(ib_order.order_id, ib_order.status)
+        # TODO: Add error handling if the order doesn't exist on our brokerage account
+        return Status(order_id="", status_type="FAILED")
 
     def query_positions(self) -> List[Position]:
         """
@@ -163,7 +179,8 @@ class BrokerIntegration:
             )
         else:
             raise ValueError(f"Unsupported secType: {contract.secType}")
-        
+    
+    # TODO: Revist this implementation
     # def _convert_from_ib_order(self, ib_order) -> Order:
     #     """
     #     Converts an Interactive Brokers order object to a local Order object (StockOrder or OptionOrder).
