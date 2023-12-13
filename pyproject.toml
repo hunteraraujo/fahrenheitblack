@@ -12,6 +12,7 @@ readme = "README.md"
 python = "<3.13,>=3.9"
 ib-insync = "^0.9.86"
 pandas = "^2.1.2"
+aiohttp-retry = "^2.8.3"
 
 
 [build-system]

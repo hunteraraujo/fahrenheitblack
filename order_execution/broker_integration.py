@@ -1,6 +1,6 @@
 from typing import Dict, List
 
-from ib_insync import IB, Stock, Option, LimitOrder, MarketOrder, Contract
+from ib_insync import Stock, Option, LimitOrder, MarketOrder
 from ib_insync.order import Order as IBOrder
 from entities.status import Status
 from entities.stock_order import StockOrder
@@ -8,6 +8,7 @@ from entities.option_order import OptionOrder
 from entities.order import Order
 from entities.confirmation import Confirmation
 from entities.position import Position
+from globals import ib
 
 class BrokerIntegration:
     """
@@ -20,12 +21,9 @@ class BrokerIntegration:
         ib (IB): An instance of the IB class from ib_insync library for broker connection and operations.
     """
 
-    def __init__(self, ib: IB):
+    def __init__(self):
         """
         Initializes the BrokerIntegration with a connection to Interactive Brokers.
-
-        Parameters:
-            ib (IB): An initialized and connected instance of the IB class.
         """
         self.ib = ib
 

@@ -3,6 +3,8 @@ from datetime import datetime
 from typing import Callable, List
 from pandas import DataFrame
 
+from globals import ib
+
 class DataRetrieval:
     """
     A class for retrieving real-time and historical market data using the ib_insync library.
@@ -12,12 +14,9 @@ class DataRetrieval:
         callbacks (dict): A dictionary mapping symbols to their corresponding list of callback functions.
     """
     
-    def __init__(self, ib: IB):
+    def __init__(self):
         """
         The constructor for the DataRetrieval class.
-        
-        Parameters:
-            ib (IB): An instance of the ib_insync.IB class that is already connected to Interactive Brokers.
         """
         self.ib = ib
         self.callbacks = {}  # Maps symbols to lists of callbacks

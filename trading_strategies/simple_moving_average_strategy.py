@@ -1,5 +1,5 @@
 from entities.stock_signal import StockSignal
-from strategy_interface import StrategyInterface
+from trading_strategies.strategy_interface import StrategyInterface
 from pandas import DataFrame
 
 class SimpleMovingAverageStrategy(StrategyInterface):

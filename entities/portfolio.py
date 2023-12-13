@@ -1,4 +1,4 @@
-from entities import Position
+from entities.position import Position
 from typing import List
 
 class Portfolio:
